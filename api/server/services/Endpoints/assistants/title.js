@@ -16,7 +16,14 @@ const addTitle = async (req, { text, responseText, conversationId, client }) => 
   const titleCache = getLogStores(CacheKeys.GEN_TITLE);
   const key = `${req.user.id}-${conversationId}`;
 
-  const title = await client.titleConvo({ text, conversationId, responseText });
+  // Commented because is not working problem with cerebrium client maybe 
+  // should be implemented in the serverless but no time
+  //const title = await client.titleConvo({ text, conversationId, responseText });
+  
+  const allWords = text.split(/\s+/);
+  // Take only the first 8 words
+  const title = allWords.slice(0, 8).join(' ');
+  
   await titleCache.set(key, title, 120000);
 
   await saveConvo(

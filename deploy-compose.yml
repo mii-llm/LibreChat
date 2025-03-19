@@ -4,7 +4,8 @@ services:
     #   context: .
     #   dockerfile: Dockerfile.multi
     #   target: api-build
-    image: ghcr.io/danny-avila/librechat-dev-api:latest
+    #image: ghcr.io/danny-avila/librechat-dev-api:latest
+    image: giux78/librechat:latest
     container_name: LibreChat-API
     ports:
       - 3080:3080
@@ -29,7 +30,8 @@ services:
         target: /app/librechat.yaml
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
-      - ./logs:/app/api/logs
+      #- ./logs:/app/api/logs
+      - logs_volume:/app/api/logs
 
   client:
     image: nginx:1.27.0-alpine
@@ -86,3 +88,4 @@ services:
 
 volumes:
   pgdata2:
+  logs_volume:
