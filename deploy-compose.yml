@@ -28,6 +28,9 @@ services:
       - type: bind
         source: ./librechat.yaml
         target: /app/librechat.yaml
+      - type: bind
+        source: ./.env
+        target: /app/.env
       - ./images:/app/client/public/images
       - ./uploads:/app/uploads
       #- ./logs:/app/api/logs
@@ -57,7 +60,7 @@ services:
     container_name: chat-meilisearch
     image: getmeili/meilisearch:v1.12.3
     restart: always
-    # ports: # Uncomment this to access meilisearch from outside docker
+    #ports: # Uncomment this to access meilisearch from outside docker
     #   - 7700:7700 # if exposing these ports, make sure your master key is not the default value
     env_file:
       - .env
@@ -85,6 +88,10 @@ services:
       - vectordb
     env_file:
       - .env
+    volumes:
+      - type: bind
+        source: ./.env
+        target: /app/.env
 
 volumes:
   pgdata2:

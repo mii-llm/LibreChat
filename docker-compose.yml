@@ -69,6 +69,10 @@ services:
       - vectordb
     env_file:
       - .env
+    volumes:
+      - type: bind
+        source: ./.env
+        target: /app/.env
 
 volumes:
   pgdata2:
